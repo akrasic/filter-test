@@ -1,6 +1,7 @@
 .PHONY: build run
 build:
 	docker run --rm -v `pwd`:/go/src/go-filter -w /go/src/go-filter \
+		-e "GOFLAGS=-buildvcs=false" \
 		golang:1.20 \
 		go build -v -o libsimple.so -buildmode=c-shared .
 

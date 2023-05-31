@@ -1,7 +1,9 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+
 	xds "github.com/cncf/xds/go/xds/type/v3"
 	"github.com/envoyproxy/envoy/contrib/golang/filters/http/source/go/pkg/api"
 	"github.com/envoyproxy/envoy/contrib/golang/filters/http/source/go/pkg/http"
@@ -11,43 +13,35 @@ import (
 const Name = "simple"
 
 func init() {
-		http.RegisterHttpFilterConfigParser(&parser{})
-	http.RegisterHttpFilterConfigFactory(Name, ConfigFactory)
+	http.RegisterHttpFilterConfigFactoryAndParser(Name, ConfigFactory, &parser{})
 }
 
 type config struct {
 	echoBody string
+	// other fields
 }
 
 type parser struct {
 }
 
-// func (p *parser) Parse(any *anypb.Any) (interface{}, error) {
-func (p *parser) Parse(any *anypb.Any) interface{} {
+func (p *parser) Parse(any *anypb.Any) (interface{}, error) {
 	configStruct := &xds.TypedStruct{}
 	if err := any.UnmarshalTo(configStruct); err != nil {
-		return nil
-		// return nil, err
+		return nil, err
 	}
 
 	v := configStruct.Value
 	conf := &config{}
 	prefix, ok := v.AsMap()["prefix_localreply_body"]
 	if !ok {
-		fmt.Println("Missing prefix_localreply_body")
-		// return nil, errors.New("missing prefix_localreply_body")
-		return nil
+		return nil, errors.New("missing prefix_localreply_body")
 	}
 	if str, ok := prefix.(string); ok {
 		conf.echoBody = str
 	} else {
-		fmt.Println("prefix_localreply_body: expect string while got %T", prefix)
-		// return nil, fmt.Errorf("prefix_localreply_body: expect string while got %T", prefix)
-		return nil
+		return nil, fmt.Errorf("prefix_localreply_body: expect string while got %T", prefix)
 	}
-	fmt.Println("------------ Returning the config")
-	fmt.Println(conf)
-	return conf
+	return conf, nil
 }
 
 func (p *parser) Merge(parent interface{}, child interface{}) interface{} {
@@ -65,7 +59,6 @@ func (p *parser) Merge(parent interface{}, child interface{}) interface{} {
 func ConfigFactory(c interface{}) api.StreamFilterFactory {
 	conf, ok := c.(*config)
 	if !ok {
-		fmt.Println(conf)
 		panic("unexpected config type")
 	}
 
