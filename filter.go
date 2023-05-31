@@ -11,8 +11,14 @@ type filter struct {
 }
 
 func (f *filter) DecodeHeaders(header api.RequestHeaderMap, endStream bool) api.StatusType {
-	f.callbacks.SendLocalReply(301, "", map[string]string{}, -1, "test-from-go")
-	return api.LocalReply
+	path, _ := header.Get(":path")
+	f.path = path
+
+	if path == "/string" || path == "/byte" {
+		f.callbacks.SendLocalReply(301, "", map[string]string{}, -1, "test-from-go")
+		return api.LocalReply
+	}
+	return api.Continue
 }
 
 func (f *filter) DecodeData(buffer api.BufferInstance, endStream bool) api.StatusType {
@@ -24,9 +30,17 @@ func (f *filter) DecodeTrailers(trailers api.RequestTrailerMap) api.StatusType {
 }
 
 func (f *filter) EncodeHeaders(header api.ResponseHeaderMap, endStream bool) api.StatusType {
-	toLocation := []byte("/another/castle/")
-	location := string(toLocation[:])
-	header.Set("location", location)
+	if f.path == "/string" {
+		location := "/another/string/castle"
+		header.Set("location", location)
+	}
+
+	if f.path == "/byte" {
+		whereTo := []byte("/another/byte/castle")
+		location := string(whereTo)
+		header.Set("location", location)
+	}
+
 	return api.Continue
 }
 
