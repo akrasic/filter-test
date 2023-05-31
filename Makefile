@@ -4,6 +4,10 @@ build:
 		golang:1.20 \
 		go build -v -o libsimple.so -buildmode=c-shared -buildvcs=false .
 
+build-119:
+	docker run --rm -v `pwd`:/go/src/go-filter -w /go/src/go-filter \
+		golang:1.19 \
+		go build -v -o libsimple.so -buildmode=c-shared -buildvcs=false .
 run:
 	docker run --rm -v `pwd`/envoy.yaml:/etc/envoy/envoy.yaml \
 		-v `pwd`/libsimple.so:/etc/envoy/libsimple.so \
