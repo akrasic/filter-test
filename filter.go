@@ -41,12 +41,14 @@ func (f *filter) EncodeHeaders(header api.ResponseHeaderMap, endStream bool) api
 		header.Set("location", location)
 	}
 
-	// status, _ := header.Get(":status")
+	status, _ := header.Get(":status")
+	if status == "500" || status == "504" {
     header.Set("Content-Type", "text/html")
 		f.callbacks.SendLocalReply(503, 
 			"<b>Bold textM</b>", 
 			map[string]string{"Content-Type": "text/html"}, -1, "custom-500-message")
 		return api.LocalReply
+	}
 
 	return api.Continue
 }
