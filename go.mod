@@ -3,8 +3,8 @@ module envoy-filter-bro
 go 1.20
 
 require (
-	github.com/cncf/xds/go v0.0.0-20230428030218-4003588d1b74
-	github.com/envoyproxy/envoy v1.26.1
+	github.com/cncf/xds/go v0.0.0-20230607035331-e9ce68804cb4
+	github.com/envoyproxy/envoy v1.26.2
 	github.com/go-ldap/ldap/v3 v3.4.4
 	google.golang.org/protobuf v1.30.0
 )

@@ -5,11 +5,15 @@ github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cncf/xds/go v0.0.0-20230428030218-4003588d1b74 h1:zlUubfBUxApscKFsF4VSvvfhsBNTBu0eF/ddvpo96yk=
 github.com/cncf/xds/go v0.0.0-20230428030218-4003588d1b74/go.mod h1:eXthEFrGJvWHgFFCl3hGmgk+/aYT6PnTQLykKQRLhEs=
+github.com/cncf/xds/go v0.0.0-20230607035331-e9ce68804cb4 h1:/inchEIKaYC1Akx+H+gqO04wryn5h75LSazbRlnya1k=
+github.com/cncf/xds/go v0.0.0-20230607035331-e9ce68804cb4/go.mod h1:eXthEFrGJvWHgFFCl3hGmgk+/aYT6PnTQLykKQRLhEs=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/envoyproxy/envoy v1.16.1-0.20201123162826-90e3148a720f h1:7MSc0gcHqxgeq1fT5EjU7NAhznxBbBPV9Daq4xJIVS8=
 github.com/envoyproxy/envoy v1.16.1-0.20201123162826-90e3148a720f/go.mod h1:h4LHzNYz/dk4kj2No4DgPaH3a087hHIKz/3DGL6m1v8=
 github.com/envoyproxy/envoy v1.26.1 h1:dAghNkwTk9rTnFtlEeQ+LlRVBY/+KlNfE/fVqAnYufo=
 github.com/envoyproxy/envoy v1.26.1/go.mod h1:miH794Gty39j4hAm+uZDi77Wqw4ajWzVlJHd4LjX9IU=
+github.com/envoyproxy/envoy v1.26.2 h1:XAR0/Db911UBsjvRAd5BTC5324yZ5udlxORih+MxYh8=
+github.com/envoyproxy/envoy v1.26.2/go.mod h1:miH794Gty39j4hAm+uZDi77Wqw4ajWzVlJHd4LjX9IU=
 github.com/envoyproxy/envoy/contrib/golang/filters/http/source/go v0.0.0-20230324062628-466cf15f1790 h1:0gwaogAlbAdFSlmhaJ5wZTz7OyZ+FJ0jnU+C/eUKwNs=
 github.com/envoyproxy/envoy/contrib/golang/filters/http/source/go v0.0.0-20230324062628-466cf15f1790/go.mod h1:fhJpuCrm8CxKONqp/fBZM3IeMxnK2L9edMVb170sfzA=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=

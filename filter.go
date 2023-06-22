@@ -15,7 +15,7 @@ func (f *filter) DecodeHeaders(header api.RequestHeaderMap, endStream bool) api.
 	f.path = path
 
 	if path == "/string" || path == "/byte" {
-		f.callbacks.SendLocalReply(301, "", map[string]string{}, -1, "test-from-go")
+		f.callbacks.SendLocalReply(301, "", map[string]string{"local-reply": "Set"}, -1, "test-from-go")
 		return api.LocalReply
 	}
 	return api.Continue
@@ -40,6 +40,13 @@ func (f *filter) EncodeHeaders(header api.ResponseHeaderMap, endStream bool) api
 		location := string(whereTo)
 		header.Set("location", location)
 	}
+
+	// status, _ := header.Get(":status")
+    header.Set("Content-Type", "text/html")
+		f.callbacks.SendLocalReply(503, 
+			"<b>Bold textM</b>", 
+			map[string]string{"Content-Type": "text/html"}, -1, "custom-500-message")
+		return api.LocalReply
 
 	return api.Continue
 }
